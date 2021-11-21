@@ -6,7 +6,7 @@
 #include <memory>
 
 namespace ZLib {
-    namespace CMDLineParser {
+    namespace CMDArgParser {
         class ParsedValues {
             public:
                 std::vector<std::string> flags;
@@ -25,15 +25,15 @@ namespace ZLib {
         };
 
         // Parser for parsing the arguments passed to a C++ program
-        class CommandLineParser {
+        class Parser {
             private:
                 int argc;
                 char** argv;
 
             public:
-                CommandLineParser(int argc, char** argv) {
-                    CommandLineParser::argc = argc;
-                    CommandLineParser::argv = argv;
+                Parser(int argc, char** argv) {
+                    Parser::argc = argc;
+                    Parser::argv = argv;
                 }
                 
                 // Actually parse the values

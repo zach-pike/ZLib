@@ -1,5 +1,5 @@
 #include "../../../HTTPReq/HTTPReq.hpp"
-#include "../../../CommandLineParser/CommandLineParser.hpp"
+#include "../../../CMDArgParser/CMDArgParser.hpp"
 
 #include <fstream>
 #include <iostream>
@@ -21,7 +21,7 @@ int main(int argc, char *argv[]) {
     using namespace ZLib;
 
     // Command line parser
-    CMDLineParser::CommandLineParser cmdl(argc, argv);
+    CMDArgParser::Parser cmdl(argc, argv);
     auto args = cmdl.parse();
 
     if (args->plaintext.size() < 1) return 0;
