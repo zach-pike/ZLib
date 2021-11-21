@@ -1,0 +1,1 @@
+g++ src/basicTest.cpp -o basicTest
