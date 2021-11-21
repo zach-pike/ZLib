@@ -13,6 +13,8 @@
 #include <unordered_map>
 #include <algorithm>
 
+#include "../uri-library/uri.hh"
+
 namespace ZLib {
     namespace Requests {
         struct ConnectionInfo {
@@ -296,8 +298,22 @@ namespace ZLib {
                 ConnectionInfo conninfo;
 
             public:
-                HttpRequest(ConnectionInfo info) {
-                    conninfo = info;
+                HttpRequest(std::string path) {
+                    // conninfo = info;
+
+                    uri uri(path);
+
+                    conninfo.port = uri.get_port();
+                    if (conninfo.port == 0) conninfo.port = 80;
+
+                    conninfo.path = uri.get_path();
+
+                    // URI parser i am using does not add a foward slash to the beginning
+                    conninfo.path.insert(conninfo.path.begin(), '/');
+
+                    if (conninfo.path == "") conninfo.path = "/";
+
+                    conninfo.hostname = uri.get_host();
                 }
 
                 // Btw, Host header gets set by send() function, no worries

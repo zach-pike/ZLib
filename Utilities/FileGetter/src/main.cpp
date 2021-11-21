@@ -7,16 +7,6 @@
 #include <stdlib.h>
 #include <time.h>
 
-#include "CxxUrl/url.hpp"
-
-ZLib::Requests::ConnectionInfo URLToConnectionInfo(const Url& url) {
-    return ZLib::Requests::ConnectionInfo{
-        .port = 80,
-        .path = url.path(),
-        .hostname = url.host()
-    };
-}
-
 int main(int argc, char *argv[]) {
     using namespace ZLib;
 
@@ -26,11 +16,8 @@ int main(int argc, char *argv[]) {
 
     if (args->plaintext.size() < 1) return 0;
 
-    // load url
-    Url url(args->plaintext[0]);
-
     // Make & send req
-    Requests::HttpRequest req(URLToConnectionInfo(url));
+    Requests::HttpRequest req(args->plaintext[0]);
     auto res = req.sendRequest("GET");
 
     // Dest file location
